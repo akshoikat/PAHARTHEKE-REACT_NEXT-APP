@@ -1,12 +1,22 @@
 import { Shield, Share2, Users } from "lucide-react"
 
+const SiteData = [
+  {
+    SectionBgBanner: "images/frontand/TheamImage.jpg",
+    SectionTitle: "Invest With Us",
+    ButtonText: "View Details",
+    
+  },
+]
+
 export default function InvestSection() {
+  const {SectionBgBanner , SectionTitle , ButtonText} = SiteData[0]
   return (
-    <section className="w-full">
+    <section className="w-full hidden md:block">
       {/* Top bar */}
       <div className="flex h-[48px] items-center justify-center bg-white">
         <h2 className="text-[16px] font-bold uppercase tracking-wide text-[#0f172a]">
-          Invest With Us
+          {SectionTitle}
         </h2>
       </div>
 
@@ -14,7 +24,7 @@ export default function InvestSection() {
       <div
         className="relative h-[280px] w-full"
         style={{
-          backgroundImage: "url('TheamImage.jpg')",
+          backgroundImage: `url('${SectionBgBanner}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -63,7 +73,7 @@ export default function InvestSection() {
 
           {/* Button */}
           <button className="mt-8 rounded-[3px] bg-[#22c55e] px-6 py-2 text-[13px] font-medium text-black transition hover:bg-[#16a34a]">
-            View Details
+            {ButtonText}
           </button>
         </div>
       </div>

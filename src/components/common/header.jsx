@@ -15,65 +15,50 @@ export default function Header() {
   const totalQty = items.reduce((total, item) => total + item.quantity, 0)
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-[#232530] text-white">
-      <div className="container mx-auto flex flex-col gap-4 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-        {/* Left: Logo */}
-        <div className="flex items-center justify-between gap-4 lg:w-[220px]">
-          <Link href="/" className="shrink-0">
-            {/* <div className="rounded-full bg-yellow-400 px-6 py-3 text-center text-black shadow-md">
-              <p className="text-2xl font-extrabold uppercase leading-none">
-                Pahar
-              </p>
-              <p className="text-2xl font-extrabold uppercase leading-none">
-                Theke
-              </p>
-            </div> */}
-          </Link>
+    <header className="sticky top-0 z-50 bg-green-50 text-black dark:bg-gray-900 dark:text-white">
+      <div className="container mx-auto px-3 py-3">
 
-          <div className="lg:hidden">
-            <ThemeToggle />
-          </div>
-        </div>
+        <div className="flex items-center gap-2 flex-nowrap">
 
-        {/* Middle: Search */}
-        <div className="flex w-full flex-1 items-center">
-          <div className="relative w-full max-w-xl">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          {/* <Link href="/" className="shrink-0">
+            <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+          </Link> */}
+
+          <div className="relative flex-1 min-w-0">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-yellow-500" />
             <Input
-              placeholder="Search Here"
-              className="h-11 border-none bg-white pl-10 text-black placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0"
+              placeholder="Search"
+              className="h-9 w-full border border-green-600 bg-white pl-9 text-sm text-black placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0"
             />
           </div>
-        </div>
 
-        {/* Right: Actions */}
-        <div className="flex flex-wrap items-center gap-3 lg:justify-end">
-          <div className="hidden lg:block">
+          <div className="flex items-center gap-1 shrink-0">
             <ThemeToggle />
-          </div>
 
-          <CartSheet>
+            <CartSheet>
+              <Button
+                variant="outline"
+                className="relative h-9 px-2 border-green-600 bg-transparent text-black hover:bg-white"
+              >
+                <ShoppingCart className="h-4 w-4 text-yellow-500" />
+                {totalQty > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-yellow-400 px-1 text-[10px] font-bold text-black">
+                    {totalQty}
+                  </span>
+                )}
+              </Button>
+            </CartSheet>
+
             <Button
               variant="outline"
-              className="relative h-11 border-gray-600 bg-transparent text-white hover:bg-white hover:text-black"
+              className="h-9 px-2 border-green-600 bg-transparent text-yellow-500 hover:bg-white hover:text-black"
             >
-              <ShoppingCart className="h-4 w-4 text-yellow-400" />
-              {totalQty > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-yellow-400 px-1 text-xs font-bold text-black">
-                  {totalQty}
-                </span>
-              )}
+              <User className="h-4 w-4" />
             </Button>
-          </CartSheet>
 
-          <Button
-            variant="outline"
-            className="h-11 border-gray-600 bg-transparent text-white hover:bg-white hover:text-black"
-          >
-            <User className="mr-2 h-4 w-4 text-yellow-400" />
-            Sign In
-          </Button>
+          </div>
         </div>
+
       </div>
     </header>
   )

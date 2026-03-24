@@ -16,7 +16,7 @@ export default function ThemeToggle() {
   if (!mounted) return null
 
   return ( 
-    <Button className="border-gray-600 bg-transparent text-white hover:bg-white hover:text-black"
+    <Button className="border-gray-600 bg-transparent text-yellow-400 hover:bg-white hover:text-black"
       variant="outline"
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}

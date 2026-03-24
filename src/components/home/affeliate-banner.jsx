@@ -1,12 +1,22 @@
 import { LogIn, Share2, BadgeDollarSign } from "lucide-react"
 
+const SiteData = [
+  {
+    SectionBgBanner: "images/frontand/TheamImage.jpg",
+    SectionTitle: "EARN MONEY WITH US",
+    
+  },
+]
+
 export default function EarnMoneySection() {
+
+  const { SectionBgBanner, SectionTitle } = SiteData[0]
   return (
-    <section className="w-full">
+    <section className="w-full hidden md:block">
       {/* Top Title Bar */}
       <div className="flex h-[50px] items-center justify-center bg-white">
         <h2 className="text-[15px] font-bold uppercase tracking-tight text-[#0f172a]">
-          EARN MONEY WITH US
+          {SectionTitle}
         </h2>
       </div>
 
@@ -14,7 +24,7 @@ export default function EarnMoneySection() {
       <div
         className="relative h-[282px] w-full overflow-hidden"
         style={{
-          backgroundImage: "url('TheamImage.jpg')",
+          backgroundImage: `url('${SectionBgBanner}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

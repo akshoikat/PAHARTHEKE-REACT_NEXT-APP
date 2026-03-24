@@ -8,6 +8,9 @@ import { addToCart } from "@/features/cart/cartSlice"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import ProductCard from "./product-card"
+import { Star, Zap, Phone, MessageCircle, ShoppingCart } from "lucide-react"
+import { Separator } from "@/components/ui/separator";
+
 
 export default function ProductDetailsView({ product, relatedProducts }) {
   const dispatch = useDispatch()
@@ -48,8 +51,8 @@ export default function ProductDetailsView({ product, relatedProducts }) {
                   key={index}
                   onClick={() => setSelectedImage(image)}
                   className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border bg-background transition ${selectedImage === image
-                      ? "ring-2 ring-primary border-primary"
-                      : "hover:border-primary/50"
+                    ? "ring-2 ring-primary border-primary"
+                    : "hover:border-primary/50"
                     }`}
                 >
                   <Image
@@ -71,8 +74,13 @@ export default function ProductDetailsView({ product, relatedProducts }) {
           </div>
 
           <div className="space-y-6 p-5 md:p-6">
+
+            
             <div className="space-y-3">
-              <Badge variant="secondary" className="rounded-md px-3 py-1 bg-yellow-400 dark:text-black">
+              <Badge
+                variant="secondary"
+                className="rounded-md px-3 py-1 bg-yellow-400 dark:text-black"
+              >
                 {product.category}
               </Badge>
 
@@ -103,70 +111,109 @@ export default function ProductDetailsView({ product, relatedProducts }) {
             </div>
 
             {/* Info box */}
-            <div className="rounded-xl border">
+            {/* <div className="rounded-xl border text-sm">
               <div className="grid grid-cols-2 border-b">
-                <div className="px-4 py-3 text-sm font-medium">Category</div>
-                <div className="px-4 py-3 text-sm text-muted-foreground border-l">
-                  {product.category}
-                </div>
+                <div className="px-4 py-3 font-medium">Category</div>
+                <div className="px-4 py-3 text-muted-foreground border-l">{product.category}</div>
               </div>
-
               <div className="grid grid-cols-2 border-b">
-                <div className="px-4 py-3 text-sm font-medium">Availability</div>
-                <div className="px-4 py-3  text-sm text-muted-foreground border-l">
+                <div className="px-4 py-3 font-medium">Availability</div>
+                <div className="px-4 py-3 text-muted-foreground border-l">
                   {product.stock > 0 ? "In Stock" : "Out of Stock"}
                 </div>
               </div>
-
               <div className="grid grid-cols-2 border-b">
-                <div className="px-4 py-3 text-sm font-medium">Delivery</div>
-                <div className="px-4 py-3 text-sm text-muted-foreground border-l">
-                  2–4 business days
-                </div>
+                <div className="px-4 py-3 font-medium">Delivery</div>
+                <div className="px-4 py-3 text-muted-foreground border-l">2–4 business days</div>
               </div>
-
               <div className="grid grid-cols-2">
-                <div className="px-4 py-3 text-sm font-medium">Payment</div>
-                <div className="px-4 py-3 text-sm text-muted-foreground border-l">
-                  Cash on delivery available
-                </div>
+                <div className="px-4 py-3 font-medium">Payment</div>
+                <div className="px-4 py-3 text-muted-foreground border-l">Cash on delivery available</div>
               </div>
-            </div>
+            </div> */}
 
-            {/* Quantity + CTA */}
-            <div className="space-y-4">
-              <div>
-                <p className="mb-2 text-sm font-medium">Quantity</p>
-                <div className="flex w-fit items-center rounded-xl border">
+            {/* Quantity + Sold counter */}
+            <div className="space-y-2">
+              <p className="text-sm font-medium">Quantity</p>
+              <div className="flex items-center gap-4">
+                <div className="flex w-fit items-center rounded-xl border overflow-hidden">
                   <button
-                    className="px-4 py-2 text-lg transition hover:bg-muted"
+                    className="px-4 py-2 text-lg font-bold transition hover:bg-muted"
                     onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    aria-label="Decrease quantity"
                   >
-                    -
+                    −
                   </button>
-                  <span className="min-w-14 text-center font-medium">
-                    {quantity}
-                  </span>
+                  <span className="min-w-14 text-center font-semibold">{quantity}</span>
                   <button
-                    className="px-4 py-2 text-lg transition hover:bg-muted"
+                    className="px-4 py-2 text-lg font-bold transition hover:bg-muted"
                     onClick={() => setQuantity((prev) => prev + 1)}
+                    aria-label="Increase quantity"
                   >
                     +
                   </button>
                 </div>
+
+                {/* Live sold counter */}
+                <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <span className="inline-block h-2 w-2 rounded-full bg-green-400 animate-pulse" />
+                  <strong className="text-foreground">30 Sold</strong> in last 24 hours
+                </span>
               </div>
+            </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button size="lg" className="bg-green-400 flex-1" onClick={handleAddToCart}>
-                  Add to Cart
-                </Button>
+            <Separator />
 
-                <Link href="/checkout" className="flex-1">
-                  <Button variant="outline" size="lg" className="bg-yellow-400 w-full">
-                    Go to Checkout
-                  </Button>
+              {/* cta Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+              <Button
+                size="lg"
+                className="w-full bg-green-400 text-black hover:bg-green-500 font-semibold"
+                onClick={handleAddToCart}
+              >
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                Add to Cart
+              </Button>
+
+              <Button
+                size="lg"
+                className="w-full bg-yellow-400 text-black hover:bg-yellow-500 font-semibold"
+                asChild
+              >
+                <Link href="/checkout">
+                  <Zap className="mr-2 h-5 w-5" />
+                  Buy Now
                 </Link>
-              </div>
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full border-green-300 bg-green-200/50 text-green-800 hover:bg-green-200 font-semibold"
+                asChild
+              >
+                <a href="tel:+8801711731066">
+                  <Phone className="mr-2 h-5 w-5" />
+                  কল করে অর্ডার করুন
+                </a>
+              </Button>
+
+              <Button
+                size="lg"
+                className="w-full bg-green-700 text-white hover:bg-green-800 font-semibold"
+                asChild
+              >
+                <a
+                  href="https://wa.me/+8801711731066"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle className="mr-2 h-5 w-5" />
+                  হোয়াটসঅ্যাপে অর্ডার করুন
+                </a>
+              </Button>
+
             </div>
           </div>
         </div>

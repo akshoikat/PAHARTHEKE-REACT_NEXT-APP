@@ -11,6 +11,7 @@ export default function HomePage() {
     <>
       <Header />
       <main>
+        
         <HeroSection />
         <FeaturedProducts />
         <EarnMoneySection />
