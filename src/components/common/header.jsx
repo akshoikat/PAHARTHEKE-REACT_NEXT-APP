@@ -20,9 +20,9 @@ export default function Header() {
 
         <div className="flex items-center gap-2 flex-nowrap">
 
-          {/* <Link href="/" className="shrink-0">
+          <Link href="/" className="shrink-0">
             <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
-          </Link> */}
+          </Link>
 
           <div className="relative flex-1 min-w-0">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-yellow-500" />

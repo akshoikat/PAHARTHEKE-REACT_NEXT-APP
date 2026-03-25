@@ -108,7 +108,7 @@ export default function ProductCard({ product }) {
           <button
             onClick={handleAddToCart}
             disabled={!isInStock}
-            className="ml-auto inline-flex items-center gap-2 rounded-xl bg-green-400 px-4 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-[#FDC700]/50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="ml-auto inline-flex items-center gap-2 rounded-xl TheamColor px-4 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-[#FDC700]/50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <ShoppingCart className="h-4 w-4" />
             {isInStock ? "Add" : "Unavailable"}

@@ -80,7 +80,9 @@
   --sidebar-ring: oklch(0.708 0 0);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  
 }
+
 
 .dark {
   --background: #101828; /* Dark background - edited by dev_akshoikat@005 */
@@ -116,6 +118,9 @@
   --sidebar-ring: oklch(0.556 0 0);
   
 }
+body {
+   font-family: var(--font-roboto);
+}
 
 @layer base {
   * {
@@ -129,9 +134,7 @@
   }
 }
 
-.pre-color {
-  background-color: #00A63E ;
-}
-.afColor {
-  background-color: #FDC700;
+.TheamColor {
+  background-color:#1B5115;
+  color: #fff;
 }

@@ -156,7 +156,7 @@ export default function ProductDetailsView({ product, relatedProducts }) {
 
                 {/* Live sold counter */}
                 <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <span className="inline-block h-2 w-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="inline-block h-2 w-2 rounded-full TheamColor animate-pulse" />
                   <strong className="text-foreground">30 Sold</strong> in last 24 hours
                 </span>
               </div>
@@ -169,7 +169,7 @@ export default function ProductDetailsView({ product, relatedProducts }) {
 
               <Button
                 size="lg"
-                className="w-full bg-green-400 text-black hover:bg-green-500 font-semibold"
+                className="w-full TheamColor text-black hover:TheamColor font-semibold"
                 onClick={handleAddToCart}
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />

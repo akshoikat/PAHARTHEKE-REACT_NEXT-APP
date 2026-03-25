@@ -4,53 +4,57 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { categories } from "@/lib/data"
 import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
+
 const siteData = [
   {
-    sectionTittle: "Start Shopping Now",
-    bgVideo: "videos/HeroSectionVideo.mp4",
+    sectionButton: "Start Shopping Now",
+    bgVideo: "/videos/HeroSectionVideo.mp4",
   },
 ]
+
 export default function HeroSection() {
-  const { sectionTittle, bgVideo } = siteData[0]
-  const [emblaRef] = useEmblaCarousel({ slidesToScroll: 1, draggable: true, loop: false });
+  const { sectionButton, bgVideo } = siteData[0]
+
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      slidesToScroll: 1,
+      dragFree: false,
+    },
+    [
+      Autoplay({
+        delay: 2000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    ]
+  )
 
   return (
     <section className="relative overflow-hidden">
       <div className="relative h-[220px] w-full md:h-[360px] lg:h-[420px]">
-        {/* Background Video */}
         <div className="absolute inset-0 overflow-hidden">
           <video
-            className="absolute left-1/2 top-1/2 h-[120vw] min-h-full w-[213.33vw] min-w-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[120vw] min-h-full w-[213.33vw] min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
             src={bgVideo}
             autoPlay
             muted
             loop
             playsInline
-            loading="eager"
+            preload="auto"
           />
         </div>
-        {/* Overlay */}
+
         <div className="absolute inset-0 bg-black/50" />
 
-        {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center px-4 text-center">
           <div className="max-w-4xl space-y-4 md:space-y-6">
-            {/* <h2 className="text-3xl font-extrabold uppercase tracking-tight text-yellow-400 md:text-6xl">
-              Bangladesh&apos;s
-            </h2>
-
-            <p className="text-2xl font-medium text-yellow-300 md:text-5xl">
-              First &amp; Only
-            </p>
-
-            <h1 className="text-3xl font-bold leading-tight text-white md:text-6xl">
-              International Standard Abattoir
-            </h1> */}
-
             <div className="pt-2">
               <Link href="/">
-                <Button className="h-12 rounded-md bg-green-400 px-6 text-base font-semibold text-black hover:bg-yellow-300">
-                  {sectionTittle}
+                <Button className="h-12 rounded-md TheamColor px-6 text-base font-semibold text-black hover:bg-yellow-300">
+                  {sectionButton}
                 </Button>
               </Link>
             </div>
@@ -58,54 +62,31 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Floating Category Cards */}
-      <div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
-        <div className="embla" ref={emblaRef}>
-          <div className="embla__container flex gap-4">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className="flex-shrink-0 w-[45%] sm:w-[30%] md:w-[25%] lg:w-[18%] rounded-2xl bg-[#f2f2f2] p-6 text-center shadow-lg transition hover:-translate-y-1"
-              >
-                <div className="mb-4 flex justify-center">
-                  <img
-                    src={category.icon}
-                    alt={category.name}
-                    className="h-16 w-16 object-contain"
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-[#2b2b2b]">
-                  {category.name}
-                </h3>
-              </div>
-            ))}
+<div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
+  <div className="overflow-hidden" ref={emblaRef}>
+    <div className="flex justify-center">
+      {categories.map((category) => (
+        <div
+          key={category.id}
+          className="min-w-0 flex-[0_0_70%] sm:flex-[0_0_40%] md:flex-[0_0_25%] lg:flex-[0_0_18%] px-2"
+        >
+          <div className="rounded-2xl bg-[#f2f2f2] p-6 text-center shadow-lg transition hover:-translate-y-1">
+            <div className="mb-4 flex justify-center">
+              <img
+                src={category.icon}
+                alt={category.name}
+                className="h-16 w-16 object-contain"
+              />
+            </div>
+            <h3 className="text-lg font-semibold text-[#2b2b2b]">
+              {category.name}
+            </h3>
           </div>
         </div>
-      </div>
-      {/* <div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className="rounded-2xl bg-[#f2f2f2] p-6 text-center shadow-lg transition hover:-translate-y-1"
-              >
-                <div className="mb-4 flex justify-center">
-                  <img
-                    src={category.icon}
-                    alt={category.name}
-                    className="h-16 w-16 object-contain"
-                  />
-                </div>
-
-                <h3 className="text-lg font-semibold text-[#2b2b2b]">
-                  {category.name}
-                </h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
+      ))}
+    </div>
+  </div>
+</div>
     </section>
   )
 }

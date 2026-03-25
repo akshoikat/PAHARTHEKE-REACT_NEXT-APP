@@ -39,11 +39,11 @@ export default function CartSheet({ children }) {
         {/* ── Header ── */}
         <SheetHeader className="flex flex-row items-center justify-between border-b px-5 py-4">
           <SheetTitle className="flex items-center gap-2 text-lg font-bold">
-            <ShoppingCart className="h-5 w-5 text-green-500" />
+            <ShoppingCart className="h-5 w-5 TheamColor" />
             Your Cart
           </SheetTitle>
           {items.length > 0 && (
-            <span className="rounded-full bg-green-400 px-2.5 py-0.5 text-xs font-bold text-black">
+            <span className="rounded-full TheamColorpx-2.5 py-0.5 text-xs font-bold text-black">
               {items.length} item{items.length > 1 ? "s" : ""}
             </span>
           )}
@@ -56,7 +56,7 @@ export default function CartSheet({ children }) {
           {items.length === 0 && (
             <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-12 text-center">
               <div className="flex h-24 w-24 items-center justify-center rounded-full bg-green-200/50">
-                <ShoppingCart className="h-12 w-12 text-green-400" />
+                <ShoppingCart className="h-12 w-12 TheamColor" />
               </div>
               <div className="space-y-1">
                 <p className="text-lg font-semibold">Your cart is empty</p>
@@ -95,7 +95,7 @@ export default function CartSheet({ children }) {
                   {/* Info */}
                   <div className="flex flex-1 flex-col gap-1 min-w-0">
                     <p className="truncate text-sm font-semibold">{item.name}</p>
-                    <p className="text-sm font-bold text-green-500">৳{item.price}</p>
+                    <p className="text-sm font-bold TheamColor ">৳{item.price}</p>
 
                     {/* Qty Stepper */}
                     <div className="flex w-fit items-center overflow-hidden rounded-lg border text-sm">
@@ -144,7 +144,7 @@ export default function CartSheet({ children }) {
             {/* Subtotal */}
             <div className="flex items-center justify-between">
               <span className="font-medium text-muted-foreground">Subtotal</span>
-              <span className="text-xl font-bold text-green-500">
+              <span className="text-xl font-bold TheamColor">
                 ৳{subtotal.toFixed(2)}
               </span>
             </div>
@@ -166,7 +166,7 @@ export default function CartSheet({ children }) {
 
               {/* Complete Order — green-400 */}
               <Link href="/checkout">
-                <Button className="w-full bg-green-400 text-black hover:bg-green-500 font-semibold">
+                <Button className="w-full TheamColor text-black hover:TheamColor font-semibold">
                   <Zap className="mr-2 h-4 w-4" />
                   Complete Order
                 </Button>
