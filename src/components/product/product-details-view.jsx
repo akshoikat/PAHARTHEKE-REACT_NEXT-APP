@@ -110,28 +110,6 @@ export default function ProductDetailsView({ product, relatedProducts }) {
               </p>
             </div>
 
-            {/* Info box */}
-            {/* <div className="rounded-xl border text-sm">
-              <div className="grid grid-cols-2 border-b">
-                <div className="px-4 py-3 font-medium">Category</div>
-                <div className="px-4 py-3 text-muted-foreground border-l">{product.category}</div>
-              </div>
-              <div className="grid grid-cols-2 border-b">
-                <div className="px-4 py-3 font-medium">Availability</div>
-                <div className="px-4 py-3 text-muted-foreground border-l">
-                  {product.stock > 0 ? "In Stock" : "Out of Stock"}
-                </div>
-              </div>
-              <div className="grid grid-cols-2 border-b">
-                <div className="px-4 py-3 font-medium">Delivery</div>
-                <div className="px-4 py-3 text-muted-foreground border-l">2–4 business days</div>
-              </div>
-              <div className="grid grid-cols-2">
-                <div className="px-4 py-3 font-medium">Payment</div>
-                <div className="px-4 py-3 text-muted-foreground border-l">Cash on delivery available</div>
-              </div>
-            </div> */}
-
             {/* Quantity + Sold counter */}
             <div className="space-y-2">
               <p className="text-sm font-medium">Quantity</p>

@@ -1,8 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { categories } from "@/lib/data"
+import { getCategories } from "@/lib/data"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
@@ -15,6 +16,7 @@ const siteData = [
 
 export default function HeroSection() {
   const { sectionButton, bgVideo } = siteData[0]
+  const [categories, setCategories] = useState([])
 
   const [emblaRef] = useEmblaCarousel(
     {
@@ -31,6 +33,15 @@ export default function HeroSection() {
       }),
     ]
   )
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const data = await getCategories()
+      setCategories(data)
+    }
+
+    fetchCategories()
+  }, [])
 
   return (
     <section className="relative overflow-hidden">
@@ -62,31 +73,31 @@ export default function HeroSection() {
         </div>
       </div>
 
-<div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
-  <div className="overflow-hidden" ref={emblaRef}>
-    <div className="flex justify-center">
-      {categories.map((category) => (
-        <div
-          key={category.id}
-          className="min-w-0 flex-[0_0_70%] sm:flex-[0_0_40%] md:flex-[0_0_25%] lg:flex-[0_0_18%] px-2"
-        >
-          <div className="rounded-2xl bg-[#f2f2f2] p-6 text-center shadow-lg transition hover:-translate-y-1">
-            <div className="mb-4 flex justify-center">
-              <img
-                src={category.icon}
-                alt={category.name}
-                className="h-16 w-16 object-contain"
-              />
-            </div>
-            <h3 className="text-lg font-semibold text-[#2b2b2b]">
-              {category.name}
-            </h3>
+      {/* <div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex justify-center">
+            {categories.map((category) => (
+              <div
+                key={category.id}
+                className="min-w-0 flex-[0_0_70%] px-2 sm:flex-[0_0_40%] md:flex-[0_0_25%] lg:flex-[0_0_18%]"
+              >
+                <div className="rounded-2xl bg-[#f2f2f2] p-6 text-center shadow-lg transition hover:-translate-y-1">
+                  <div className="mb-4 flex justify-center">
+                    <img
+                      src={category.icon}
+                      alt={category.name}
+                      className="h-16 w-16 object-contain"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#2b2b2b]">
+                    {category.name}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</div>
+      </div> */}
     </section>
   )
 }

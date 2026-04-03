@@ -4,6 +4,12 @@ import { useEffect, useMemo, useState } from "react"
 import { ChevronLeft, ChevronRight, Flame } from "lucide-react"
 import ProductCard from "./product-card"
 
+const siteData = [
+  {
+
+    sectionTittle: "Best Selling Products"
+  },
+]
 export default function ProductSlider({
   products = [],
   autoplay = true,
@@ -70,7 +76,7 @@ export default function ProductSlider({
             </span>
 
             <h2 className="whitespace-nowrap text-2xl font-bold tracking-tight text-gray-900 dark:text-white md:text-3xl">
-              Best Deals
+              {siteData[0].sectionTittle}
             </h2>
 
             <div className="hidden h-px flex-1 bg-gradient-to-r from-gray-300 to-transparent dark:from-gray-700 dark:to-transparent md:block md:min-w-[140px] lg:min-w-[420px]" />

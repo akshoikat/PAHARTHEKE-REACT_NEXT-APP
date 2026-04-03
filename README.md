@@ -2,6 +2,85 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+## Folder Structure
+```bash
+PAHARTHEKE-REACT_NEXT-APP
+├── components.json
+├── eslint.config.mjs
+├── .gitignore
+├── jsconfig.json
+├── next.config.mjs
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── README.md
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   ├── window.svg
+│   ├── images/
+│   │   └── frontand/
+│   │       ├── sectionBanner.jpg
+│   │       └── TheamImage.jpg
+│   └── videos/
+│       └── HeroSectionVideo.mp4
+└── src/
+    ├── app/
+    │   ├── favicon.ico
+    │   ├── globals.css
+    │   ├── layout.js
+    │   ├── page.js
+    │   ├── checkout/
+    │   │   └── page.jsx
+    │   └── products/
+    │       └── [slug]/
+    │           └── page.jsx
+    ├── components/
+    │   ├── cart/
+    │   │   └── cart-sheet.jsx
+    │   ├── common/
+    │   │   ├── footer.jsx
+    │   │   ├── header.jsx
+    │   │   ├── section-title.jsx
+    │   │   └── theme-toggle.jsx
+    │   ├── home/
+    │   │   ├── about.jsx
+    │   │   ├── affeliate-banner.jsx
+    │   │   ├── category-section.jsx
+    │   │   ├── customar-review.jsx
+    │   │   ├── featured-products.jsx
+    │   │   ├── hero-section.jsx
+    │   │   ├── invest-banner.jsx
+    │   │   └── promo-banner.jsx
+    │   ├── product/
+    │   │   ├── product-card.jsx
+    │   │   ├── product-details-view.jsx
+    │   │   └── product-slider.jsx
+    │   ├── providers/
+    │   │   ├── store-provider.jsx
+    │   │   └── theme-provider.jsx
+    │   └── ui/
+    │       ├── badge.jsx
+    │       ├── button.jsx
+    │       ├── card.jsx
+    │       ├── dialog.jsx
+    │       ├── dropdown-menu.jsx
+    │       ├── input.jsx
+    │       ├── separator.jsx
+    │       ├── sheet.jsx
+    │       ├── skeleton.jsx
+    │       └── tabs.jsx
+    ├── features/
+    │   └── cart/
+    │       └── cartSlice.js
+    └── lib/
+        ├── data.js
+        ├── store.js
+        └── utils.js
+```
+
 First, run the development server:
 
 ```bash

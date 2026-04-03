@@ -39,11 +39,11 @@ export default function CartSheet({ children }) {
         {/* ── Header ── */}
         <SheetHeader className="flex flex-row items-center justify-between border-b px-5 py-4">
           <SheetTitle className="flex items-center gap-2 text-lg font-bold">
-            <ShoppingCart className="h-5 w-5 TheamColor" />
+            <ShoppingCart className="h-5 w-5 text-green-500" />
             Your Cart
           </SheetTitle>
           {items.length > 0 && (
-            <span className="rounded-full TheamColorpx-2.5 py-0.5 text-xs font-bold text-black">
+            <span className="rounded-full text-green-500 px-2.5 py-0.5 text-xs font-bold text-black">
               {items.length} item{items.length > 1 ? "s" : ""}
             </span>
           )}
@@ -56,7 +56,7 @@ export default function CartSheet({ children }) {
           {items.length === 0 && (
             <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-12 text-center">
               <div className="flex h-24 w-24 items-center justify-center rounded-full bg-green-200/50">
-                <ShoppingCart className="h-12 w-12 TheamColor" />
+                <ShoppingCart className="h-12 w-12 text-green-500" />
               </div>
               <div className="space-y-1">
                 <p className="text-lg font-semibold">Your cart is empty</p>
@@ -95,7 +95,7 @@ export default function CartSheet({ children }) {
                   {/* Info */}
                   <div className="flex flex-1 flex-col gap-1 min-w-0">
                     <p className="truncate text-sm font-semibold">{item.name}</p>
-                    <p className="text-sm font-bold TheamColor ">৳{item.price}</p>
+                    <p className="text-sm font-bold text-green-500 ">৳{item.price}</p>
 
                     {/* Qty Stepper */}
                     <div className="flex w-fit items-center overflow-hidden rounded-lg border text-sm">
@@ -144,7 +144,7 @@ export default function CartSheet({ children }) {
             {/* Subtotal */}
             <div className="flex items-center justify-between">
               <span className="font-medium text-muted-foreground">Subtotal</span>
-              <span className="text-xl font-bold TheamColor">
+              <span className="text-xl font-bold text-green-500">
                 ৳{subtotal.toFixed(2)}
               </span>
             </div>
