@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import Header from "@/components/common/header"
 import ProductDetailsView from "@/components/product/product-details-view"
-import { getProducts } from "@/lib/data"
 
 export default async function ProductDetailsPage({ params }) {
   const { slug } = await params
