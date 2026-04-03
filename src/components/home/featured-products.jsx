@@ -10,47 +10,53 @@ export default function FeaturedProducts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/products")
-      .then(async (res) => {
-        const text = await res.text();
+    let isMounted = true;
 
-        try {
-          const data = JSON.parse(text);
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("/api/products");
+        const data = await res.json();
 
-          // Raw API response
-          const raw = data?.data?.data || data?.data || [];
-          console.log("Raw API data:", raw);
+        const raw = data?.data?.data || data?.data || [];
+        const normalized = raw.map(transformProduct);
 
-          // Transform products
-          const normalized = raw.map(transformProduct);
-          console.log("Normalized products:", normalized);
-
+        if (isMounted) {
           setProducts(normalized);
-        } catch (err) {
-          console.error("Not JSON:", text);
-        } finally {
+        }
+      } catch (err) {
+        console.error("Product fetch error:", err);
+      } finally {
+        if (isMounted) {
           setLoading(false);
         }
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchProducts();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (loading) {
-    return <div className="text-center py-10">Loading products...</div>;
+    return (
+      <div className="text-center py-10">
+        Loading products...
+      </div>
+    );
   }
 
   if (!products.length) {
-    return <div className="text-center py-10">No products found</div>;
+    return (
+      <div className="text-center py-10">
+        No products found
+      </div>
+    );
   }
-console.log("All products featured values:", products.map(p => p.featured));
-  // Filter featured products (safe with 1, "1", true)
-  const featured = products.filter((p) => Number(p.featured) === 1);
-  console.log("Featured products:", featured);
 
-  // Fallback to latest products if no featured
+  const featured = products.filter((p) => Number(p.featured) === 1);
+
   const finalProducts =
     featured.length > 0 ? featured : getLatestProducts(products, 10);
 
