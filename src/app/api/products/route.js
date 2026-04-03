@@ -6,7 +6,7 @@ export async function GET() {
   try {
     const { data } = await axios.get("https://pahartheke.com/api/v6/products", {
       httpsAgent: agent,
-      timeout: 20000, // 20s timeout
+      timeout: 50000, // increase timeout to 50 seconds
       headers: { "User-Agent": "Mozilla/5.0 (Node.js Axios)" },
     });
     return new Response(JSON.stringify(data), {
