@@ -10,66 +10,47 @@ export default function FeaturedProducts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let isMounted = true;
+    fetch("/api/products")
+      .then(async (res) => {
+        const text = await res.text();
 
-  const fetchProducts = async () => {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => {
-      controller.abort(); 
-    }, 30000);
+        try {
+          const data = JSON.parse(text);
 
-    try {
-      const res = await fetch("/api/products", {
-        signal: controller.signal,
-      });
+          // Raw API response
+          const raw = data?.data?.data || data?.data || [];
+          console.log("Raw API data:", raw);
 
-      const data = await res.json();
+          // Transform products
+          const normalized = raw.map(transformProduct);
+          console.log("Normalized products:", normalized);
 
-      const raw = data?.data?.data || data?.data || [];
-      const normalized = raw.map(transformProduct);
-
-      if (isMounted) {
-        setProducts(normalized);
-      }
-    } catch (err) {
-      if (err.name === "AbortError") {
-        console.error("Request timeout (30s)");
-      } else {
-        console.error("Product fetch error:", err);
-      }
-    } finally {
-      clearTimeout(timeout); // ✅ cleanup
-      if (isMounted) {
+          setProducts(normalized);
+        } catch (err) {
+          console.error("Not JSON:", text);
+        } finally {
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
         setLoading(false);
-      }
-    }
-  };
-
-    fetchProducts();
-
-    return () => {
-      isMounted = false;
-    };
+      });
   }, []);
 
   if (loading) {
-    return (
-      <div className="text-center py-10">
-        Loading products...
-      </div>
-    );
+    return <div className="text-center py-10">Loading products...</div>;
   }
 
   if (!products.length) {
-    return (
-      <div className="text-center py-10">
-        No products found
-      </div>
-    );
+    return <div className="text-center py-10">No products found</div>;
   }
-
+console.log("All products featured values:", products.map(p => p.featured));
+  // Filter featured products (safe with 1, "1", true)
   const featured = products.filter((p) => Number(p.featured) === 1);
+  console.log("Featured products:", featured);
 
+  // Fallback to latest products if no featured
   const finalProducts =
     featured.length > 0 ? featured : getLatestProducts(products, 10);
 
