@@ -17,7 +17,6 @@ export default function ProductSlider({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [slidesToShow, setSlidesToShow] = useState(1)
-  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     const updateSlidesToShow = () => {
@@ -48,15 +47,15 @@ export default function ProductSlider({
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
   }
 
-  useEffect(() => {
-    if (!autoplay || maxIndex === 0 || isHovered) return
+ useEffect(() => {
+  if (!autoplay || maxIndex === 0) return
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
-    }, autoplayDelay)
+  const interval = setInterval(() => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
+  }, autoplayDelay)
 
-    return () => clearInterval(interval)
-  }, [autoplay, autoplayDelay, isHovered, maxIndex])
+  return () => clearInterval(interval)
+}, [autoplay, autoplayDelay, maxIndex])
 
   useEffect(() => {
     if (currentIndex > maxIndex) {
@@ -87,11 +86,7 @@ export default function ProductSlider({
           </button>
         </div>
 
-        <div
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+
           <button
             onClick={handlePrev}
             aria-label="Previous products"
@@ -143,7 +138,6 @@ export default function ProductSlider({
             ))}
           </div>
         </div>
-      </div>
     </section>
   )
 }

@@ -4,6 +4,7 @@ const nextConfig = {
     images: {
     domains: ["pahartheke.com"],
   },
+   
 };
 
 

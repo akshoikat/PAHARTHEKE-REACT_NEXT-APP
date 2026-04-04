@@ -45,7 +45,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[220px] w-full md:h-[360px] lg:h-[420px]">
+      <div className="relative h-[220px] w-full md:h-[100vh] lg:h-[100vh]">
         <div className="absolute inset-0 overflow-hidden">
           <video
             className="pointer-events-none absolute left-1/2 top-1/2 h-[120vw] min-h-full w-[213.33vw] min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
@@ -73,7 +73,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* <div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
+      <div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex justify-center">
             {categories.map((category) => (
@@ -97,7 +97,7 @@ export default function HeroSection() {
             ))}
           </div>
         </div>
-      </div> */}
+      </div>
     </section>
   )
 }

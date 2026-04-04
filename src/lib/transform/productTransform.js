@@ -1,26 +1,8 @@
 export function transformProduct(apiProduct) {
   let images = ["/placeholder.png"];
 
-  try {
-    if (apiProduct.photos) {
-      const parsed = typeof apiProduct.photos === "string"
-        ? JSON.parse(apiProduct.photos)
-        : apiProduct.photos;
-
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        images = parsed.map(
-          (img) => `https://pahartheke.com/public/${img}`
-        );
-      }
-    }
-
-    // fallback to thumbnail_img with .jpg
-    if (images.length === 1 && images[0] === "/placeholder.png" && apiProduct.thumbnail_img) {
-      images = [`https://pahartheke.com/public/${apiProduct.thumbnail_img}.jpg`];
-    }
-  } catch (e) {
-    console.error("Image parse error:", e);
-    images = ["/placeholder.png"];
+  if (apiProduct.thumbnail_image) {
+    images = [apiProduct.thumbnail_image];
   }
 
   return {

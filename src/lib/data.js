@@ -2,7 +2,7 @@
 export const getCategories = async (search = "") => {
   try {
     const res = await fetch(
-      `https://pahartheke.com/api/v6/products`
+      `https://pahartheke.com/api/v6/categories`
     );
 
     if (!res.ok) {
