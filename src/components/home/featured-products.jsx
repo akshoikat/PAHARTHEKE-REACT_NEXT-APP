@@ -12,25 +12,38 @@ export default function FeaturedProducts() {
   useEffect(() => {
     let isMounted = true;
 
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("/api/products");
-        const data = await res.json();
+  const fetchProducts = async () => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => {
+      controller.abort(); 
+    }, 30000);
 
-        const raw = data?.data?.data || data?.data || [];
-        const normalized = raw.map(transformProduct);
+    try {
+      const res = await fetch("/api/products", {
+        signal: controller.signal,
+      });
 
-        if (isMounted) {
-          setProducts(normalized);
-        }
-      } catch (err) {
-        console.error("Product fetch error:", err);
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+      const data = await res.json();
+
+      const raw = data?.data?.data || data?.data || [];
+      const normalized = raw.map(transformProduct);
+
+      if (isMounted) {
+        setProducts(normalized);
       }
-    };
+    } catch (err) {
+      if (err.name === "AbortError") {
+        console.error("Request timeout (30s)");
+      } else {
+        console.error("Product fetch error:", err);
+      }
+    } finally {
+      clearTimeout(timeout); // ✅ cleanup
+      if (isMounted) {
+        setLoading(false);
+      }
+    }
+  };
 
     fetchProducts();
 
