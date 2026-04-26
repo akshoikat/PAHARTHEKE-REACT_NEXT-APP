@@ -1,30 +1,24 @@
-import { notFound } from "next/navigation"
-import Header from "@/components/common/header"
-import ProductDetailsView from "@/components/product/product-details-view"
+import { notFound } from "next/navigation";
+import { getProductBySlug } from "@/lib/api/products";
 
 export default async function ProductDetailsPage({ params }) {
-  const { slug } = await params
+  const { slug } = await params;
 
-  const products = await getProducts();
-  const product = products.find((item) => item.slug === slug)
+  let product = null;
 
-  if (!product) {
-    notFound()
+  try {
+    product = await getProductBySlug(slug);
+  } catch (error) {
+    notFound();
   }
 
-  const relatedProducts = products.filter(
-    (item) => item.category === product.category && item.id !== product.id
-  )
+  if (!product) {
+    notFound();
+  }
 
   return (
-    <>
-      <Header />
-      <main className="container mx-auto px-4 py-10">
-        <ProductDetailsView
-          product={product}
-          relatedProducts={relatedProducts}
-        />
-      </main>
-    </>
-  )
+    <main className="container mx-auto px-4 py-10">
+      <h1 className="text-2xl font-bold">{product.name}</h1>
+    </main>
+  );
 }

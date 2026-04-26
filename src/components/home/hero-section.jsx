@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { getCategories } from "@/lib/data"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import CategorySection from "./category-section"
 
 const siteData = [
   {
@@ -73,31 +74,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="relative z-20 -mt-16 px-4 pb-10 md:-mt-20">
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex justify-center">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className="min-w-0 flex-[0_0_70%] px-2 sm:flex-[0_0_40%] md:flex-[0_0_25%] lg:flex-[0_0_18%]"
-              >
-                <div className="rounded-2xl bg-[#f2f2f2] p-6 text-center shadow-lg transition hover:-translate-y-1">
-                  <div className="mb-4 flex justify-center">
-                    <img
-                      src={category.icon}
-                      alt={category.name}
-                      className="h-16 w-16 object-contain"
-                    />
-                  </div>
-                  <h3 className="text-lg font-semibold text-[#2b2b2b]">
-                    {category.name}
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* import categories */}
+      <CategorySection/>
     </section>
   )
 }
