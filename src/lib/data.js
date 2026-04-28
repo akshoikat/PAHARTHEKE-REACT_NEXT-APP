@@ -1,19 +1,9 @@
+export async function getCategories() {
+  const res = await fetch("/api/categories", {
+    cache: "no-store",
+  });
 
-export const getCategories = async (search = "") => {
-  try {
-    const res = await fetch(
-      `https://pahartheke.com/api/v6/categories`
-    );
+  const result = await res.json();
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch categories");
-    }
-
-    const data = await res.json();
-
-    return data.data.data; // because Laravel pagination wraps inside data
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-};
+  return Array.isArray(result?.data) ? result.data : [];
+}

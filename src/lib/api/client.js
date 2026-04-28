@@ -19,6 +19,8 @@ function getBackendBaseUrl() {
     throw new Error("BACKEND_API_URL is not defined in environment variables.");
   }
 
+  console.log("ENV:", process.env.NEXT_PUBLIC_BACKEND_API_URL);
+
   return baseUrl.replace(/\/+$/, "");
 }
 
