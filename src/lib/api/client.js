@@ -12,7 +12,8 @@ class ApiError extends Error {
 }
 
 function getBackendBaseUrl() {
-  const baseUrl = process.env.BACKEND_API_URL;
+  const baseUrl =
+  process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL;
 
   if (!baseUrl) {
     throw new Error("BACKEND_API_URL is not defined in environment variables.");
