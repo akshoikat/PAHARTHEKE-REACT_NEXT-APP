@@ -14,6 +14,8 @@ export default function Header() {
 
   const totalQty = items.reduce((total, item) => total + item.quantity, 0)
 
+  const headerImage = ("https://pahartheke.com/assets/img/logo.png")
+
   return (
     <header className="sticky top-0 z-50 bg-green-50 text-black dark:bg-gray-900 dark:text-white">
       <div className="container mx-auto px-3 py-3">
@@ -21,7 +23,7 @@ export default function Header() {
         <div className="flex items-center gap-2 flex-nowrap">
 
           <Link href="/" className="shrink-0">
-            <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+            <img src="https://pahartheke.com/assets/img/logo.png" alt="Logo" className="h-10 w-auto" />
           </Link>
 
           <div className="relative flex-1 min-w-0">
@@ -33,7 +35,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-1 shrink-0">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
 
             <CartSheet>
               <Button

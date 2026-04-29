@@ -8,12 +8,23 @@ function removeApiSuffix(url = "") {
 
 function makeFileUrl(filePath) {
   if (!filePath) return null;
-  if (/^https?:\/\//i.test(filePath)) return filePath;
 
-  const base = removeApiSuffix(BACKEND_API_URL || "");
+  if (/^https?:\/\//i.test(filePath)) {
+    return filePath;
+  }
+
+  const base = "https://pahartheke.com";
   const cleanPath = String(filePath).replace(/^\/+/, "");
 
-  return `${base}/${cleanPath}`;
+  if (cleanPath.startsWith("uploads/")) {
+    return `${base}/${cleanPath}`;
+  }
+
+  if (cleanPath.startsWith("all/")) {
+    return `${base}/uploads/${cleanPath}`;
+  }
+
+  return `${base}/uploads/all/${cleanPath}`;
 }
 
 function normalizeCategory(category) {
@@ -22,8 +33,8 @@ function normalizeCategory(category) {
       ? null
       : Number(category.parent_id);
 
-  const icon = makeFileUrl(category?.icon || category?.banner);
-  const image = makeFileUrl(category?.banner || category?.icon);
+  const icon = makeFileUrl(category?.icon || category?.banner || category?.image);
+  const image = makeFileUrl(category?.banner || category?.icon || category?.image);
 
   return {
     id: Number(category?.id),
@@ -41,6 +52,7 @@ function extractCategories(payload) {
   if (Array.isArray(payload?.data)) return payload.data;
   if (Array.isArray(payload?.categories)) return payload.categories;
   if (Array.isArray(payload?.data?.categories)) return payload.data.categories;
+  if (Array.isArray(payload?.data?.data)) return payload.data.data;
   return [];
 }
 
@@ -85,8 +97,7 @@ export async function GET() {
 
     const categories = extractCategories(payload)
       .map(normalizeCategory)
-      .filter((item) => item.id && item.name);
-
+      .filter((item) => item.id || item.name);
     return NextResponse.json(
       {
         success: true,

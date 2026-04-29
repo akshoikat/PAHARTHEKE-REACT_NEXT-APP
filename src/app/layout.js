@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased`}>
-        <ThemeProvider>
+        {/* <ThemeProvider> */}
           <StoreProvider>
             {children}
             <Toaster
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
               }}
             />
           </StoreProvider>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );
